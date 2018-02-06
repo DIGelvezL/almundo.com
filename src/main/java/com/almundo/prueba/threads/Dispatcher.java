@@ -1,11 +1,13 @@
 package com.almundo.prueba.threads;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.almundo.prueba.entities.Empleado;
+import com.almundo.prueba.dto.LlamadaThreadDto;
 import com.almundo.prueba.repository.EmpleadoRepository;
 import com.almundo.prueba.repository.LlamadaRepository;
 
@@ -27,11 +29,17 @@ public class Dispatcher implements Runnable {
 	}
 	
 	private void dispatchCall() {
-		List<Empleado> operadoresList = empleadoRepository.consultarOperadoresDisponibles();
 		
-		if(Objects.nonNull(operadoresList) && !operadoresList.isEmpty()){
-			
-		}
+		BlockingQueue<LlamadaThreadDto> blockingQueue = new ArrayBlockingQueue<>(1);
+		
+		ExecutorService producer = Executors.newFixedThreadPool(1);
+		ExecutorService consumer = Executors.newFixedThreadPool(1);
+		producer.submit(new ProducerLlamada(blockingQueue, empleadoRepository, llamadaRepository));
+		consumer.submit(new ConsumerLlamada(blockingQueue));
+		producer.shutdown();
+		consumer.shutdown();
+		
+		
 	}
 
 	public Long getNumeroLlamada() {
