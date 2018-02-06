@@ -20,21 +20,16 @@ public class Empleado implements Serializable {
 
 	private String apellidos;
 
-	private Boolean libre;
+	private Boolean disponible;
 
 	private String nombres;
 
-	//bi-directional many-to-one association to TipoEmpleado
 	@ManyToOne
 	@JoinColumn(name="id_tipo_empleado")
 	private TipoEmpleado tipoEmpleado;
 
-	//bi-directional many-to-one association to Llamada
 	@OneToMany(mappedBy="empleado", fetch=FetchType.EAGER)
 	private List<Llamada> llamadas;
-
-	public Empleado() {
-	}
 
 	public Integer getId() {
 		return this.id;
@@ -52,12 +47,12 @@ public class Empleado implements Serializable {
 		this.apellidos = apellidos;
 	}
 
-	public Boolean getLibre() {
-		return this.libre;
+	public Boolean getDisponible() {
+		return this.disponible;
 	}
 
-	public void setLibre(Boolean libre) {
-		this.libre = libre;
+	public void setDisponible(Boolean disponible) {
+		this.disponible = disponible;
 	}
 
 	public String getNombres() {
