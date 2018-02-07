@@ -43,8 +43,8 @@ public class ConsumerLlamada implements Runnable {
 				}
 			}
         	
-        } catch (Exception err) {
-        	
+        } catch (Exception e) {
+        	e.printStackTrace();
         }
 	}
 

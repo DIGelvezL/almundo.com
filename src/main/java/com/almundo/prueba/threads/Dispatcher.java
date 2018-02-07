@@ -19,8 +19,10 @@ public class Dispatcher implements Runnable {
 	
 	private Long numeroLlamada;
 	
-	public Dispatcher(Long numeroLlamada){
+	public Dispatcher(Long numeroLlamada, EmpleadoRepository empleadoRepository, LlamadaRepository llamadaRepository){
 		this.numeroLlamada = numeroLlamada;
+		this.empleadoRepository = empleadoRepository;
+		this.llamadaRepository = llamadaRepository;
 	}
 
 	@Override
