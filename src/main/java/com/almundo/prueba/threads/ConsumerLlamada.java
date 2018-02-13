@@ -42,6 +42,9 @@ public class ConsumerLlamada implements Runnable {
 					break;
 				}
 			}
+			
+//			Thread.sleep(20000);
+//			System.out.println("prueba de hilos: " + Thread.currentThread().getName());
         	
         } catch (Exception e) {
         	e.printStackTrace();
