@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.almundo.prueba.repository.EmpleadoRepository;
 import com.almundo.prueba.repository.LlamadaRepository;
 import com.almundo.prueba.service.LlamadaService;
-import com.almundo.prueba.threads.CallPool;
 import com.almundo.prueba.threads.Dispatcher;
 
 @Service
@@ -23,7 +22,7 @@ public class LlamadaServiceImpl implements LlamadaService {
 	@Override
 	public void responderLlamada(Long numeroLlamada) {
 		int numeroEmpleados = empleadoRepository.consultarNumeroEmpleados();
-		ExecutorService executor = CallPool.getExecutorService();
+		ExecutorService executor = Executors.newFixedThreadPool(10);
 		Runnable empleado = new Dispatcher(numeroLlamada, empleadoRepository, llamadaRepository);
 		executor.execute(empleado);
 	}
