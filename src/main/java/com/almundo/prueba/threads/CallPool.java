@@ -7,13 +7,14 @@ public class CallPool {
 	
 	private static ExecutorService executor;
 	
-	public static ExecutorService getExecutorService() {
+	private CallPool() {
+		throw new IllegalAccessError("CallPool");
+	}
+	
+	public static ExecutorService getExecutorService(int numeroEmpleados) {
 		if(executor==null) {
-			executor=Executors.newFixedThreadPool(10);
-			System.out.println("crear execute");
+			executor=Executors.newFixedThreadPool(numeroEmpleados);
 		}
 		return executor;
 	}
-	
-	
 }

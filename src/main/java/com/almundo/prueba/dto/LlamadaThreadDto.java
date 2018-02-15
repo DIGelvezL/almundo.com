@@ -9,14 +9,22 @@ public class LlamadaThreadDto implements Serializable {
 
 	private static final long serialVersionUID = 3449134201320787887L;
 	
-	private EmpleadoRepository empleadoRepository;
-	private LlamadaRepository llamadaRepository;
+	private Long numeroLlamada;
+	private transient EmpleadoRepository empleadoRepository;
+	private transient LlamadaRepository llamadaRepository;
 	
-	public LlamadaThreadDto(EmpleadoRepository empleadoRepository, LlamadaRepository llamadaRepository){
+	public LlamadaThreadDto(Long numeroLlamada, EmpleadoRepository empleadoRepository, LlamadaRepository llamadaRepository){
+		this.numeroLlamada = numeroLlamada;
 		this.empleadoRepository = empleadoRepository;
 		this.llamadaRepository = llamadaRepository;
 	}
 	
+	public Long getNumeroLlamada() {
+		return numeroLlamada;
+	}
+	public void setNumeroLlamada(Long numeroLlamada) {
+		this.numeroLlamada = numeroLlamada;
+	}
 	public EmpleadoRepository getEmpleadoRepository() {
 		return empleadoRepository;
 	}
