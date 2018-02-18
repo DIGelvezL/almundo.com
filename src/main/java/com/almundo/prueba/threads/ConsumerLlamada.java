@@ -9,7 +9,6 @@ import java.util.concurrent.ExecutorService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.almundo.prueba.dto.LlamadaThreadDto;
 import com.almundo.prueba.entities.Empleado;
@@ -19,8 +18,6 @@ import com.almundo.prueba.repository.LlamadaRepository;
 import com.almundo.prueba.service.Dispatcher;
 
 public class ConsumerLlamada implements Runnable {
-	
-	@Autowired Dispatcher llamadaService;
 	
 	private final BlockingQueue<LlamadaThreadDto> sharedQueue;
 	
@@ -53,7 +50,9 @@ public class ConsumerLlamada implements Runnable {
 					if(Objects.nonNull(directorList) && !directorList.isEmpty()){
 						registrarLlamada(llamadaThreadDto.getNumeroLlamada(), empleadoRepository, llamadaRepository, directorList);
 					}else{
-						llamadaService.dispatchCall(llamadaThreadDto.getNumeroLlamada());
+						Thread.sleep(5000);
+						Dispatcher dispatcher = llamadaThreadDto.getDispatcher();
+						dispatcher.dispatchCall(llamadaThreadDto.getNumeroLlamada());
 					}
 				}
 			}

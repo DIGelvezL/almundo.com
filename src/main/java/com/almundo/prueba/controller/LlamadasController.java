@@ -13,10 +13,10 @@ import com.almundo.prueba.util.ConstantesUtil;
 @RequestMapping(ConstantesUtil.URL_API)
 public class LlamadasController {
 	
-	@Autowired Dispatcher llamadaService;	
+	@Autowired Dispatcher dispatcher;	
 
 	@RequestMapping(value = ConstantesUtil.RESPONDER_LLAMADAS, method = RequestMethod.GET)
 	public void responderLlamada(@RequestParam(value = "numeroLlamada", required = true) Long numeroLlamada){
-		llamadaService.dispatchCall(numeroLlamada);
+		dispatcher.dispatchCall(numeroLlamada);
 	}
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.almundo.prueba.repository.EmpleadoRepository;
 import com.almundo.prueba.repository.LlamadaRepository;
+import com.almundo.prueba.service.Dispatcher;
 
 public class LlamadaThreadDto implements Serializable {
 
@@ -12,11 +13,13 @@ public class LlamadaThreadDto implements Serializable {
 	private Long numeroLlamada;
 	private transient EmpleadoRepository empleadoRepository;
 	private transient LlamadaRepository llamadaRepository;
+	private transient Dispatcher dispatcher;
 	
-	public LlamadaThreadDto(Long numeroLlamada, EmpleadoRepository empleadoRepository, LlamadaRepository llamadaRepository){
+	public LlamadaThreadDto(Long numeroLlamada, EmpleadoRepository empleadoRepository, LlamadaRepository llamadaRepository, Dispatcher dispatcher){
 		this.numeroLlamada = numeroLlamada;
 		this.empleadoRepository = empleadoRepository;
 		this.llamadaRepository = llamadaRepository;
+		this.dispatcher = dispatcher;
 	}
 	
 	public Long getNumeroLlamada() {
@@ -37,5 +40,11 @@ public class LlamadaThreadDto implements Serializable {
 	public void setLlamadaRepository(LlamadaRepository llamadaRepository) {
 		this.llamadaRepository = llamadaRepository;
 	}
-
+	public Dispatcher getDispatcher() {
+		return dispatcher;
+	}
+	public void setDispatcher(Dispatcher dispatcher) {
+		this.dispatcher = dispatcher;
+	}
+	
 }

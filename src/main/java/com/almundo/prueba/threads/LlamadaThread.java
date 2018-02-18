@@ -26,9 +26,10 @@ public class LlamadaThread implements Runnable {
 
 	@Override
 	public void run() {
+		System.out.println("Llamada numero: " + numeroLlamada + " en el hilo " + Thread.currentThread().getName() + " con el empleado " + empleado.getNombres());
 		esperarXsegundos();
 		finalizaLlamada();
-		System.out.println("prueba de hilos: " + Thread.currentThread().getName() + " ----numero llamada: " + numeroLlamada + " con el empleado " + empleado.getNombres());
+		System.out.println("---- Fin llamada numero: " + numeroLlamada + " en el hilo " + Thread.currentThread().getName() + " con el empleado " + empleado.getNombres());
 	}
 	
 	private void esperarXsegundos() {

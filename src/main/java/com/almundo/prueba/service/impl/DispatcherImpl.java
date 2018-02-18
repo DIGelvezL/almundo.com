@@ -20,6 +20,7 @@ public class DispatcherImpl implements Dispatcher {
 
 	@Autowired EmpleadoRepository empleadoRepository;
 	@Autowired LlamadaRepository llamadaRepository;
+	@Autowired Dispatcher dispatcher;
 	
 	@Override
 	public void dispatchCall(Long numeroLlamada) {
@@ -28,7 +29,7 @@ public class DispatcherImpl implements Dispatcher {
 		
 		ExecutorService producer = Executors.newFixedThreadPool(1);
 		ExecutorService consumer = Executors.newFixedThreadPool(1);
-		producer.submit(new ProducerLlamada(blockingQueue, numeroLlamada, empleadoRepository, llamadaRepository));
+		producer.submit(new ProducerLlamada(blockingQueue, numeroLlamada, empleadoRepository, llamadaRepository, dispatcher));
 		consumer.submit(new ConsumerLlamada(blockingQueue));
 		producer.shutdown();
 		consumer.shutdown();
